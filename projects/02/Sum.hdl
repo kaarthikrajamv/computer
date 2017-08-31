@@ -1,0 +1,8 @@
+CHIP Sum{
+	IN p,cin;
+	OUT add;
+
+	PARTS:
+	Xor(a=p,b=cin,out=add);
+	
+}

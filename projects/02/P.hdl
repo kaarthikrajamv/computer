@@ -1,0 +1,10 @@
+CHIP P{
+	IN a[4],b[4];
+	OUT p[4];
+
+	PARTS:
+	Xor(a=a[0],b=b[0],out=p[0]);	
+	Xor(a=a[1],b=b[1],out=p[1]);
+	Xor(a=a[2],b=b[2],out=p[2]);
+	Xor(a=a[3],b=b[3],out=p[3]);
+}

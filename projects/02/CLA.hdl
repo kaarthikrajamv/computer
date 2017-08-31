@@ -1,0 +1,15 @@
+CHIP CLA {
+	IN a[4],b[4],cin;
+	OUT sum[4],cout;
+
+	PARTS:
+	P(a=a,b=b,p=p);
+	G(a=a,b=b,g=g);
+	IntCarry(p=p,g=g,carryin=cin,c=c);
+	Sum(p=p[0],cin=cin,add=sum[0]);
+	Sum(p=p[1],cin=c[0],add=sum[1]);
+	Sum(p=p[2],cin=c[1],add=sum[2]);
+	Sum(p=p[3],cin=c[2],add=sum[3]);
+
+	}
+

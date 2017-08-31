@@ -1,0 +1,10 @@
+CHIP G{
+	IN a[4],b[4];
+	OUT g[4];
+
+	PARTS:
+	And(a=a[0],b=b[0],out=g[0]);
+	And(a=a[1],b=b[1],out=g[1]);
+	And(a=a[2],b=b[2],out=g[2]);
+	And(a=a[3],b=b[3],out=g[3]);
+}
