@@ -1,8 +1,11 @@
 CHIP Sum{
-	IN p,cin;
-	OUT add;
+	IN p[4],carryin[4],carries[4];
+	OUT sum[4];
 
 	PARTS:
-	Xor(a=p,b=cin,out=add);
+	Xor(a=p[0],b=carryin[3],out=sum[0]);
+	Xor(a=p[1],b=carries[0],out=sum[1]);
+	Xor(a=p[2],b=carries[1],out=sum[2]);
+	Xor(a=p[3],b=carries[2],out=sum[3]);
 	
 }

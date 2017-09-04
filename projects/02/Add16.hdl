@@ -9,9 +9,29 @@
  */
 
 CHIP Add16 {
-    IN a[16], b[16];
+    IN a[16], b[16], carryin[4];
     OUT out[16];
 
     PARTS:
    // Put you code here:
+   P(a=a[0..3],b=b[0..3],p=p1);
+   G(a=a[0..3],b=b[0..3],g=g1);
+   IntCarry(p=p1,g=g1,carryin=carryin,c=c4);
+   Sum(p=p1,carryin=carryin,carries=c4,sum=out[0..3]);
+
+   P(a=a[4..7],b=b[4..7],p=p2);
+   G(a=a[4..7],b=b[4..7],g=g2);
+   IntCarry(p=p2,g=g2,carryin=c4,c=c8);
+   Sum(p=p2,carryin=c4,carries=c8,sum=out[4..7]);
+
+   P(a=a[8..11],b=b[8..11],p=p3);
+   G(a=a[8..11],b=b[8..11],g=g3);
+   IntCarry(p=p3,g=g3,carryin=c8,c=c12);
+   Sum(p=p3,carryin=c8,carries=c12,sum=out[8..11]);
+
+   P(a=a[12..15],b=b[12..15],p=p4);
+   G(a=a[12..15],b=b[12..15],g=g4);
+   IntCarry(p=p4,g=g4,carryin=c12,c=c16);
+   Sum(p=p4,carryin=c12,carries=c16,sum=out[12..15]);
+
 }
