@@ -1,0 +1,8 @@
+CHIP addsub {
+    IN a[16], b[16],s;
+    OUT out[16],overflow;
+
+    PARTS:
+    addsubBitManip(b=b,out=b1,s=s);
+   	Add16(a=a,b=b1,carryin=s,out=out,overflow=overflow);
+}

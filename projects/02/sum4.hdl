@@ -1,0 +1,10 @@
+CHIP sum4{
+	IN a[4], b[4], carryin;
+	OUT out[4],carryout,overflow;
+
+	PARTS:
+   P(a=a[0..3],b=b[0..3],p=p1);
+   G(a=a[0..3],b=b[0..3],g=g1);
+   IntCarry(p=p1,g=g1,carryin=carryin,c=c4,carryout=carryout,overflow=overflow);
+   Sum(p=p1,carryin=carryin,carries=c4,sum=out[0..3]);
+   }

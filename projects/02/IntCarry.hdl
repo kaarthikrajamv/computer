@@ -1,9 +1,9 @@
 CHIP IntCarry{
-	IN p[4],g[4],carryin[4];
-	OUT c[4];
+	IN p[4],g[4],carryin;
+	OUT c[3],carryout,overflow;
 
 	PARTS:
-	And(a=p[0],b=carryin[3],out=o3);
+	And(a=p[0],b=carryin,out=o3);
 	Or(a=g[0],b=o3,out=c[0]);
 
 	And(a=p[1],b=o3,out=o4);
@@ -25,8 +25,11 @@ CHIP IntCarry{
 	Or(a=o12,b=o13,out=o16);
 	Or(a=o14,b=o15,out=o17);
 	Or(a=o16,b=o17,out=o18);
-	Or(a=o18,b=g[3],out=c[3]);
+	Or(a=o18,b=g[3],out=carryout);
 
+	Or(a=o10,b=o11,out=a1);
+	Or(a=o18,b=g[3],out=a2);
+	Xor(a=a1,b=a2,out=overflow);
 
 
 }
