@@ -1,0 +1,44 @@
+CHIP FullMul
+{
+	IN r1[4],r2[4],r3[4],r4[4];
+	OUT out[8],overflow;
+
+	PARTS:
+
+	
+	Not(in=r1[0],out=out0not);
+	Not(in=out0not,out=out[0]);
+	
+	FullAdder(a=r1[1],b=r2[0],sum=out[1],carry=c11);
+	
+	FullAdder(a=r1[2],b=r2[1],c=c11,sum=s12,carry=c12);
+	
+	FullAdder(a=r1[3],b=r2[2],sum=s13,c=c12,carry=c13);
+	FullAdder(a=s12,b=r3[0],sum=out[2],carry=c21);
+	
+	FullAdder(b=r2[3],sum=s14,carry=c14);
+	FullAdder(a=s13,b=r3[1],c=c21,sum=s22,carry=c22);
+	
+	FullAdder(a=s14,b=r3[2],sum=s23,carry=c23);
+	FullAdder(a=s22,b=r4[0],sum=out[3],carry=c31);
+	
+	FullAdder(a=c14,b=r3[2],sum=s24,carry=c24);
+	FullAdder(a=s23,b=r4[1],sum=s32,carry=c32);
+	FullAdder(a=s23,b=r4[1],sum=out[4],carry=c32);
+	
+	FullAdder(a=s24,b=r4[2],sum=s33,carry=c33);
+	FullAdder(a=s24,b=r4[2],sum=out[5],carry=c33);
+	
+	FullAdder(a=c24,b=r4[3],sum=s34,carry=c34);
+	FullAdder(a=c24,b=r4[3],sum=out[6],carry=out[7]);
+
+	Or(a=s32,b=s33,out=O1);
+	Or(a=s34,b=c34,out=O2);
+	Or(a=O1,b=O2,out=overflow);
+
+
+
+
+
+
+}
