@@ -1,0 +1,7 @@
+CHIP csamul16{
+	IN a[16],b[16];
+	OUT prod[32],overflow;
+
+	PARTS:
+	3to2reducer
+}

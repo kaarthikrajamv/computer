@@ -1,6 +1,6 @@
 CHIP Mul{
 	IN x[4],y[4];
-	OUT z[8],overflow;
+	OUT z[4],overflow;
 
 	PARTS:
 	And4(a=x,b=y[0],c=r1);
