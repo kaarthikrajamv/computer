@@ -1,0 +1,15 @@
+CHIP Mul4Sign{
+	IN x[4],y[4];
+	OUT out[8],overflow;
+
+	PARTS:
+
+	And4(a=x,b=y[0],c=r1);
+	And4(a=x,b=y[1],c=r2);
+	And4(a=x,b=y[2],c=r3);
+	And4(a=x,b=y[3],c=i4);
+	Not4(in=i4,out=r4);
+
+	Xor(a=x[3],b=y[3],out=o1);
+	FullMulSign(r1=r1,r2=r2,r3=r3,r4=r4,oin=o1,out=out,overflow=overflow);
+}

@@ -1,0 +1,12 @@
+CHIP Mul{
+	IN x[4],y[4];
+	OUT z[8],overflow;
+
+	PARTS:
+	And4(a=x,b=y[0],c=r1);
+	And4(a=x,b=y[1],c=r2);
+	And4(a=x,b=y[2],c=r3);
+	And4(a=x,b=y[3],c=r4);
+
+	FullMul(r1=r1,r2=r2,r3=r3,r4=r4,out=z,overflow=overflow);
+}
