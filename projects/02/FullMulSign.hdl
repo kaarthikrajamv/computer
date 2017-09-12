@@ -37,8 +37,8 @@ CHIP FullMulSign{
 	And(a=o5,b=o6,out=p2);
 	And(a=o7,b=p1,out=p3);
 	And(a=p2,b=p3,out=prod1);
-	And(a=prod1,b=oin,out=t1);
-	Not(in=t1,out=t3);
+	Not(in=prod1,out=t1);
+	And(a=t1,b=oin,out=t3);
 
 	Not(in=oin,out=oinNot);
 	Or(a=o3,b=o4,out=s1);
