@@ -1,36 +1,52 @@
-CHIP 
+CHIP FullMulSign{
+	IN r1[4],r2[4],r3[4],r4[4],oin;
+	OUT out[8],overflow;
 
-
-
-
-
-
-
-
-
-
-
-
+	PARTS:
+	Not(out=one);
+	And(a=r1[0],b=r1[0],out=out[0]);
 
 	FullAdder(a=r1[1],b=r2[0],sum=out[1],carry=c11);
-	
 	FullAdder(a=r1[2],b=r2[1],c=c11,sum=s12,carry=c12);
-	
 	FullAdder(a=r1[3],b=r2[2],sum=s13,c=c12,carry=c13);
+	FullAdder(b=r2[3],a=r1[3],sum=s14,c=c13,carry=c14);
+	FullAdder(a=r1[3],b=r2[3],c=c14,sum=s15,carry=c15);
+	FullAdder(a=r1[3],b=r2[3],c=c15,sum=s16,carry=c16);
+	FullAdder(a=r1[3],b=r2[3],c=c16,sum=s17,carry=c17);
+
 	FullAdder(a=s12,b=r3[0],sum=out[2],carry=c21);
-	
-	FullAdder(b=r2[3],sum=s14,c=c13,carry=c14);
 	FullAdder(a=s13,b=r3[1],c=c21,sum=s22,carry=c22);
-	
 	FullAdder(a=s14,b=r3[2],c=c22,sum=s23,carry=c23);
-	FullAdder(a=s22,b=r4[0],sum=out[3],carry=c31);
-	
-	FullAdder(a=c14,b=r3[3],c=c23,sum=s24,carry=c24);
-	FullAdder(a=s23,b=r4[1],c=c31,sum=s32,carry=c32);
-	FullAdder(a=s23,b=r4[1],c=c31,sum=out[4],carry=c36);
-	
-	FullAdder(a=s24,b=r4[2],c=c32,sum=s33,carry=c33);
-	FullAdder(a=s24,b=r4[2],c=c32,sum=out[5],carry=c38);
-	
-	FullAdder(a=c24,b=r4[3],c=c33,sum=s34,carry=c34);
-	FullAdder(a=c24,b=r4[3],c=c33,sum=out[6],carry=out[7];
+	FullAdder(a=s15,b=r3[3],c=c23,sum=s24,carry=c24);
+	FullAdder(a=s16,b=r3[3],c=c24,sum=s25,carry=c25);
+	FullAdder(a=s17,b=r3[3],c=c25,sum=s26,carry=c26);
+
+	FullAdder(a=s22,b=r4[0],c=one,sum=out[3],carry=c31);
+	FullAdder(a=s23,b=r4[1],c=c31,sum=out[4],carry=c32);
+	FullAdder(a=s24,b=r4[2],c=c32,sum=out[5],carry=c33);
+	FullAdder(a=s25,b=r4[3],c=c33,sum=out[6],carry=c34);
+	FullAdder(a=s26,b=r4[3],c=c33,sum=out[7],carry=c35);
+
+	FullAdder(a=s22,b=r4[0],c=one,sum=o3,carry=c30);
+	FullAdder(a=s23,b=r4[1],c=c31,sum=o4,carry=c36);
+	FullAdder(a=s24,b=r4[2],c=c32,sum=o5,carry=c37);
+	FullAdder(a=s25,b=r4[3],c=c33,sum=o6,carry=c38);
+	FullAdder(a=s26,b=r4[3],c=c33,sum=o7,carry=c39);
+
+	And(a=o3,b=o4,out=p1);
+	And(a=o5,b=o6,out=p2);
+	And(a=o7,b=p1,out=p3);
+	And(a=p2,b=p3,out=prod1);
+	And(a=prod1,b=oin,out=t1);
+	Not(in=t1,out=t3);
+
+	Not(in=oin,out=oinNot);
+	Or(a=o3,b=o4,out=s1);
+	Or(a=o5,b=o6,out=s2);
+	Or(a=o7,b=s1,out=s3);
+	Or(a=s2,b=s3,out=sum1);
+	And(a=sum1,b=oinNot,out=t2);
+
+	Or(a=t2,b=t3,out=overflow);
+
+}
