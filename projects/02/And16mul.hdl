@@ -1,0 +1,23 @@
+CHIP And16mul{
+	IN a[16],b;
+	OUT c[16];
+
+	PARTS:
+	And(a=a[0],b=b,out=c[0]);
+	And(a=a[1],b=b,out=c[1]);
+	And(a=a[2],b=b,out=c[2]);
+	And(a=a[3],b=b,out=c[3]);
+	And(a=a[4],b=b,out=c[4]);
+	And(a=a[5],b=b,out=c[5]);
+	And(a=a[6],b=b,out=c[6]);
+	And(a=a[7],b=b,out=c[7]);
+	And(a=a[8],b=b,out=c[8]);
+	And(a=a[9],b=b,out=c[9]);
+	And(a=a[10],b=b,out=c[10]);
+	And(a=a[11],b=b,out=c[11]);
+	And(a=a[12],b=b,out=c[12]);
+	And(a=a[13],b=b,out=c[13]);
+	And(a=a[14],b=b,out=c[14]);
+	And(a=a[15],b=b,out=c[15]);
+
+}

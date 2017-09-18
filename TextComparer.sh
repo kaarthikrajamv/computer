@@ -1,1 +1,0 @@
-/home/raja/Softwares/nand2tetris/tools/TextComparer.sh

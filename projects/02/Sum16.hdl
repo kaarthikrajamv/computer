@@ -1,0 +1,16 @@
+CHIP Sum16{
+	IN p0[4],p1[4],p2[4],p3[4],c[3],g0[4],g1[4],g2[4],g3[4];
+	OUT sum[16];
+
+	PARTS:
+	IntCarry(p=p0,g=g0,c=c1);
+	IntCarry(p=p1,g=g1,c=c2,carryin=c[0]);
+	IntCarry(p=p2,g=g2,c=c3,carryin=c[1]);
+	IntCarry(p=p3,g=g3,c=c4,carryin=c[2]);
+
+	Sum(p=p0,carries=c1,sum=sum[0..3]);
+	Sum(p=p1,carries=c2,sum=sum[4..7],carryin=c[0]);
+	Sum(p=p2,carries=c3,sum=sum[8..11],carryin=c[1]);
+	Sum(p=p3,carries=c4,sum=sum[12..15],carryin=c[2]);
+
+}
