@@ -1,0 +1,25 @@
+CHIP Xor16{
+	IN a[16];
+	OUT out[16];
+
+	PARTS:
+	Xor(a=a[0],b=a[0],out=x);
+	Not(in=x,out=o1);
+
+	Xor(a=a[0],b=o1,out=out[0]);
+	Xor(a=a[1],b=o1,out=out[1]);
+	Xor(a=a[2],b=o1,out=out[2]);
+	Xor(a=a[3],b=o1,out=out[3]);
+	Xor(a=a[4],b=o1,out=out[4]);
+	Xor(a=a[5],b=o1,out=out[5]);
+	Xor(a=a[6],b=o1,out=out[6]);
+	Xor(a=a[7],b=o1,out=out[7]);
+	Xor(a=a[8],b=o1,out=out[8]);
+	Xor(a=a[9],b=o1,out=out[9]);
+	Xor(a=a[10],b=o1,out=out[10]);
+	Xor(a=a[11],b=o1,out=out[11]);
+	Xor(a=a[12],b=o1,out=out[12]);
+	Xor(a=a[13],b=o1,out=out[13]);
+	Xor(a=a[14],b=o1,out=out[14]);
+	Xor(a=a[15],b=o1,out=out[15]);
+}
