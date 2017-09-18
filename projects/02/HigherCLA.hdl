@@ -1,0 +1,7 @@
+CHIP HigherCLA{
+	IN a[16],b[16];
+	OUT s[16],cout;
+
+	PARTS:
+	
+}

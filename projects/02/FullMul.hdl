@@ -1,7 +1,7 @@
 CHIP FullMul
 {
 	IN r1[4],r2[4],r3[4],r4[4];
-	OUT out[8],overflow;
+	OUT out[4],overflow;
 
 	PARTS:
 
@@ -22,13 +22,13 @@ CHIP FullMul
 	
 	FullAdder(a=c14,b=r3[3],c=c23,sum=s24,carry=c24);
 	FullAdder(a=s23,b=r4[1],c=c31,sum=s32,carry=c32);
-	FullAdder(a=s23,b=r4[1],c=c31,sum=out[4],carry=c36);
+	//FullAdder(a=s23,b=r4[1],c=c31,sum=out[4],carry=c36);
 	
 	FullAdder(a=s24,b=r4[2],c=c32,sum=s33,carry=c33);
-	FullAdder(a=s24,b=r4[2],c=c32,sum=out[5],carry=c38);
+	//FullAdder(a=s24,b=r4[2],c=c32,sum=out[5],carry=c38);
 	
 	FullAdder(a=c24,b=r4[3],c=c33,sum=s34,carry=c34);
-	FullAdder(a=c24,b=r4[3],c=c33,sum=out[6],carry=out[7]);
+	//FullAdder(a=c24,b=r4[3],c=c33,sum=out[6],carry=out[7]);
 
 	Or(a=s32,b=s33,out=O1);
 	Or(a=s34,b=c34,out=O2);

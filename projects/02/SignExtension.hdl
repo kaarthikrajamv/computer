@@ -1,0 +1,23 @@
+CHIP SignExtension{
+	IN a[16];
+	OUT out[32];
+
+	And16(a=a,b=a,out=out[0..15]);
+	And(a=a[15],b=a[15],out=out[16]);
+	And(a=a[15],b=a[15],out=out[17]);
+	And(a=a[15],b=a[15],out=out[18]);
+	And(a=a[15],b=a[15],out=out[19]);
+	And(a=a[15],b=a[15],out=out[20]);
+	And(a=a[15],b=a[15],out=out[21]);
+	And(a=a[15],b=a[15],out=out[22]);
+	And(a=a[15],b=a[15],out=out[23]);
+	And(a=a[15],b=a[15],out=out[24]);
+	And(a=a[15],b=a[15],out=out[25]);
+	And(a=a[15],b=a[15],out=out[26]);
+	And(a=a[15],b=a[15],out=out[27]);
+	And(a=a[15],b=a[15],out=out[28]);
+	And(a=a[15],b=a[15],out=out[29]);
+	And(a=a[15],b=a[15],out=out[30]);
+	And(a=a[15],b=a[15],out=out[31]);
+
+}
