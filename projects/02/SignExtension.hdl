@@ -1,8 +1,8 @@
 CHIP SignExtension{
-	IN a[16];
-	OUT out[32];
+	IN a[8];
+	OUT out[16];
 
-	And16(a=a,b=a,out=out[0..15]);
+	And16(a=a,b=a,out=out[0..7]);
 	And(a=a[15],b=a[15],out=out[16]);
 	And(a=a[15],b=a[15],out=out[17]);
 	And(a=a[15],b=a[15],out=out[18]);
