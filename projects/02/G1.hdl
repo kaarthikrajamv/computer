@@ -1,0 +1,20 @@
+CHIP G1{
+	IN p[4],g[4];
+	OUT out;
+
+	PARTS:
+	And(a=p[3],b=p[2],out=O1);
+	And(a=p[1],b=g[1],out=O2);
+	And(a=O1,b=O2,out=and1);
+	
+	And(a=p[3],b=p[2],out=O3);
+	And(a=O3,b=g[1],out=and2);
+	
+	And(a=p[3],b=g[2],out=and3);
+
+	Or(a=and1,b=and2,out=sum1);
+	Or(a=and3,b=g[3],out=sum2);
+
+	Or(a=sum1,b=sum2,out=out);
+
+}

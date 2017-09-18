@@ -1,7 +1,29 @@
 CHIP HigherCLA{
 	IN a[16],b[16];
-	OUT s[16],cout;
+	OUT sum[16],overflow;
 
 	PARTS:
+	P(a=a[0..3],b=b[0..3],p=p0);
+	P(a=a[4..7],b=b[4..7],p=p1);
+	P(a=a[8..11],b=b[8..11],p=p2);
+	P(a=a[12..15],b=b[12..15],p=p3);
+
+	G(a=a[0..3],b=b[0..3],g=g0);
+	G(a=a[4..7],b=b[4..7],g=g1);
+	G(a=a[8..11],b=b[8..11],g=g2);
+	G(a=a[12..15],b=b[12..15],g=g3);
+
+	P1(p=p0,out=pI0);
+	P1(p=p1,out=pI1);
+	P1(p=p2,out=pI2);
+	P1(p=p3,out=pI3);
+
+	G1(p=p0,g=g0,out=gI0);
+	G1(p=p1,g=g1,out=gI1);
+	G1(p=p2,g=g2,out=gI2);
+	G1(p=p3,g=g3,out=gI3);
+
+	IntCarry(p[0]=pI0,p[1]=pI1,p[2]=pI2,p[3]=pI3,g[0]=gI0,g[1]=gI1,g[2]=gI2,g[3]=gI3,c=outerc,carryout=overflow);
 	
+	Sum16(p0=p0,p1=p1,p2=p2,p3=p3,c=outerc,g0=g0,g1=g1,g2=g2,g3=g3,sum=sum);
 }

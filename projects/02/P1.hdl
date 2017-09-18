@@ -1,0 +1,9 @@
+CHIP P1{
+	IN p[4];
+	OUT out;
+
+	PARTS:
+	And(a=p[0],b=p[1],out=out1);
+	And(a=p[2],b=p[3],out=out2);
+	And(a=out1,b=out2,out=out);
+}
