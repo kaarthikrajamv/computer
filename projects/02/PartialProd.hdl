@@ -1,0 +1,20 @@
+CHIP PartialProd{
+	IN a[8],b[8];
+	OUT pp0[16],pp1[16],pp2[16],pp3[16],pp4[16],pp5[16],pp6[16],pp7[16];
+
+	And16mul(a=a,b=b[0],c=pp0);
+	shift(a[0..7]=a,b=x1);
+	And16mul(a=x1,b=b[1],c=pp1);
+	shift(a=x1,b=x2);
+	And16mul(a=x2,b=b[2],c=pp2);
+	shift(a=x2,b=x3);
+	And16mul(a=x3,b=b[3],c=pp3);
+	shift(a=x3,b=x4);
+	And16mul(a=x4,b=b[4],c=pp4);
+	shift(a=x4,b=x5);
+	And16mul(a=x5,b=b[5],c=pp5);
+	shift(a=x5,b=x6);
+	And16mul(a=x6,b=b[6],c=pp6);
+	shift(a=x6,b=x7);
+	And16mul(a=x7,b=b[7],c=pp7);
+}

@@ -3,5 +3,20 @@ CHIP csamul16{
 	OUT prod[32],overflow;
 
 	PARTS:
-	3to2reducer
+	PartialProd(a=a,b=b,pp0=pp0,pp1=pp1,pp2=pp2,pp3=pp3,pp4=pp4,pp5=pp5,pp6=pp6,pp7=pp7)
+	
+	reducer3to2(a=pp0,b=pp1,c=pp2,sum=s11,cout=c11);
+	reducer3to2(a=pp3,b=pp4,c=pp5,sum=s12,cout=c12);
+	
+	reducer3to2(a=s11,b=c11,c=s12,sum=s21,cout=c21);
+	reducer3to2(a=pp6,b=pp7,c=c12,sum=s22,cout=c22);
+	
+	reducer3to2(a=s21,b=s22,c=c21,sum=s31,cout=c31);
+	
+	reducer3to2(a=s31,b=c31,c=c22,sum=s41,cout=c41);
+
+	
+
+
+	
 }
