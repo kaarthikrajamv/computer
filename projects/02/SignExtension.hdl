@@ -2,7 +2,8 @@ CHIP SignExtension{
 	IN a[8];
 	OUT out[16];
 
-	And16(a[0..7]=a,b[0..7]=a,out=out[0..7]);
+	PARTS:
+	And16(a[0..7]=a,b[0..7]=a,out[0..7]=out[0..7]);
 	And(a=a[7],b=a[7],out=out[8]);
 	And(a=a[7],b=a[7],out=out[9]);
 	And(a=a[7],b=a[7],out=out[10]);

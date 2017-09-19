@@ -19,7 +19,7 @@ CHIP Overflow{
 	Or(a=in[7],b=in[8],out=o11);
 	Or(a=in[9],b=in[10],out=o21);
 	Or(a=in[11],b=in[12],out=o31);
-	Or(a=in[13],b=in[14],out=o411);
+	Or(a=in[13],b=in[14],out=o41);
 
 	Or(a=o11,b=o21,out=o51);
 	Or(a=o31,b=o41,out=o61);

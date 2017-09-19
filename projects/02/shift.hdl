@@ -1,0 +1,6 @@
+CHIP shift{
+	IN a[16];
+	OUT b[16];
+	PARTS:
+	And16(a=a,b=a,out[0..14]=b[1..15]);
+}
