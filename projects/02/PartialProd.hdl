@@ -2,6 +2,7 @@ CHIP PartialProd{
 	IN a[8],b[8];
 	OUT pp0[16],pp1[16],pp2[16],pp3[16],pp4[16],pp5[16],pp6[16],pp7[16];
 
+	PARTS:
 	And16mul(a=a,b=b[0],c=pp0);
 	shift(a[0..7]=a,b=x1);
 	And16mul(a=x1,b=b[1],c=pp1);
