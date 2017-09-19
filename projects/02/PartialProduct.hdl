@@ -1,0 +1,26 @@
+CHIP PartialProduct{
+	IN x[8],y[8];
+	OUT pp1[16],pp2[16],pp3[16],pp4[16],pp5[16],pp6[16],pp7[16],pp8[16];
+
+	PARTS:
+	Xor(a=x[0],b=x[0],out=zero);
+	Not(in=zero,out=one);		
+	SignExtension(a=x,out=x0);
+	PP(a=x0,b=y[0],out=pp1);
+	Shift(a=x0,b=x1);
+	PP(a=x1,b=y[1],out=pp2);
+	Shift(a=x1,b=x2);
+	PP(a=x2,b=y[2],out=pp3);
+	Shift(a=x2,b=x3);
+	PP(a=x3,b=y[3],out=pp4);
+	Shift(a=x3,b=x4);
+	PP(a=x4,b=y[4],out=pp5);
+	Shift(a=x4,b=x5);
+	PP(a=x5,b=y[5],out=pp6);
+	Shift(a=x5,b=x6);
+	PP(a=x6,b=y[6],out=pp7);
+	Shift(a=x6,b=x7);
+	PP(a=x7,b=y[7],out=pp81);
+	addsubBitManip(b=pp81,s=one,out=pp8);
+}
+

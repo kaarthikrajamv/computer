@@ -1,4 +1,8 @@
 CHIP PartialProd{
+<<<<<<< HEAD
+	
+}
+=======
 	IN a[8],b[8];
 	OUT pp0[16],pp1[16],pp2[16],pp3[16],pp4[16],pp5[16],pp6[16],pp7[16];
 
@@ -19,3 +23,4 @@ CHIP PartialProd{
 	shift(a=x6,b=x7);
 	And16mul(a=x7,b=b[7],c=pp7);
 }
+>>>>>>> 2d8b03b03cb06e9e3dc137107d2aa9e6e61ff930
