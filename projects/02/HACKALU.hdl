@@ -1,0 +1,24 @@
+CHIP HACKALU{
+	
+	IN x[16],y[16],zx,nx,zy,ny,f,no;
+	OUT out[16],zr,ng;
+
+	PARTS:
+	Mux2to1(a=x,s=zx,out=o1);
+	addsubBitManip(b=o1,s=nx,out=p);
+
+	Mux2to1(a=y,s=zy,out=o2);
+	addsubBitManip(b=o2,s=ny,out=q);
+
+	HigherCLA(a=p,b=q,sum=sum);
+
+	And16(a=p,b=q,out=and);
+
+	Mux2to1(b=sum,a=and,s=f,out=r);
+	addsubBitManip(b=r,s=no,out=out1);
+
+	ALUFlags(a=out1,ng=ng,zr=zr);
+
+	And16(a=out1,b=out1,out=out);
+
+}
