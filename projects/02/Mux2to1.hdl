@@ -1,0 +1,12 @@
+CHIP Mux2to1{
+
+	IN a[16],b[16],s;
+	OUT out[16];
+
+	PARTS:
+	Not(in=s,out=snot);
+	And16mul(a=a,b=snot,c=o1);
+	And16mul(a=b,b=s,c=o2);
+
+	Or16(a=o1,b=o2,out=out);		
+}
