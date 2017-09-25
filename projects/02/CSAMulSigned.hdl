@@ -4,24 +4,23 @@ CHIP CSAMulSigned{
 
 	PARTS:
 	PartialProduct(x=x,y=y,pp1=pp1,pp2=pp2,pp3=pp3,pp4=pp4,pp5=pp5,pp6=pp6,pp7=pp7,pp8=pp8);
-	Xor(a=a[0],b=a[0],out=zero);
-	Not(in=zero,out=one);
+	Not(out=one);
 
-	Reducer3to2(a=pp1,b=pp2,c=pp3,s=s11,carry=c11);
-	Reducer3to2(a=pp4,b=pp5,c=pp6,s=s12,carry=c12);
-	Reducer3to2(a=pp7,b=pp8,c[0]=one,s=s13,carry=c13);
+	reducer3to2(a=pp1,b=pp2,c=pp3,s=s11,cout=c11);
+	reducer3to2(a=pp4,b=pp5,c=pp6,s=s12,cout=c12);
+	reducer3to2(a=pp7,b=pp8,c[0]=one,s=s13,cout=c13);
 	
-	Reducer3to2(a=c13,b=s13,c=s11,s=s21,carry=c21);
-	Reducer3to2(a=c11,b=c12,c=s12,s=s22,carry=c22);
+	reducer3to2(a=s11,b=s12,c=s13,s=s21,cout=c21);
+	reducer3to2(a=c11,b=c12,c=c13,s=s22,cout=c22);
 	
-	Reducer3to2(a=s21,b=c21,c=s22,s=s31,carry=c31);
+	reducer3to2(a=s21,b=c21,c=s22,s=s31,cout=c31);
 
-	Reducer3to2(a=s31,b=c22,c=c31,s=m,carry=n);
+	reducer3to2(a=s31,b=c22,c=c31,s=m,cout=n);
 
-	HigherCLA(a=m,b=n,sum=z);
+	HigherCLA(a=m,b=n,sum=t);
 	Xor(a=x[7],b=y[7],out=xXory);
-	Overflow(in=z,cin=xXory,out=overflow);
+	Overflow(in=t,cin=xXory,out=overflow);
 
-
+	And16(a=t,b=t,out=z);
 
 }
