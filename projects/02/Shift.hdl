@@ -19,5 +19,4 @@ CHIP Shift{
 	And(a=a[12],b=a[12],out=b[13]);
 	And(a=a[13],b=a[13],out=b[14]);
 	And(a=a[14],b=a[14],out=b[15]);
-	And(a=a[15],b=a[15],out=x);
 }
