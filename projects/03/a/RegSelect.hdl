@@ -1,0 +1,15 @@
+CHIP RegSelect{
+	IN in[16],o2[8],address[3];
+	OUT out[16];
+
+	PARTS:
+	Register(in=in,load=o2[0],out=out0);
+    Register(in=in,load=o2[1],out=out1);
+    Register(in=in,load=o2[2],out=out2);
+    Register(in=in,load=o2[3],out=out3);
+    Register(in=in,load=o2[4],out=out4);
+    Register(in=in,load=o2[5],out=out5);
+    Register(in=in,load=o2[6],out=out6);
+    Register(in=in,load=o2[7],out=out7);
+    Mux8Way16(a=out0,b=out1,c=out2,d=out3,e=out4,f=out5,g=out6,h=out7,sel=address,out=out);
+}

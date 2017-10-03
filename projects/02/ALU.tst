@@ -3,7 +3,7 @@
 // by Nisan and Schocken, MIT Press.
 // File name: projects/02/ALU.tst
 
-load ALU.hdl,
+load HACKALU.hdl,
 output-file ALU.out,
 compare-to ALU.cmp,
 output-list x%B1.16.1 y%B1.16.1 zx%B1.1.1 nx%B1.1.1 zy%B1.1.1 

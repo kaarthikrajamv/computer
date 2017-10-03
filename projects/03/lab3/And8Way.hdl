@@ -1,0 +1,15 @@
+CHIP And8Way{
+	IN a;
+	OUT out;
+
+	PARTS:
+	And(a=a[0],b=a[1],out=a01);
+	And(a=a[2],b=a[3],out=a23);
+	And(a=a[4],b=a[5],out=a45);
+	And(a=a[6],b=a[7],out=a67);
+
+	And(a=a01,b=a23,out=a0123);
+	And(a=a45,b=a67,out=a4567);
+
+	And(a=a0123,b=a4567,out=out);
+}

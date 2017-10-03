@@ -1,0 +1,23 @@
+CHIP Decoder3to8{
+	IN a[3];
+	OUT out[8];
+
+	PARTS:
+	Not(out=one);
+
+	Not(in=a[0],out=nota0);
+	Not(in=a[1],out=nota1);
+	Not(in=a[2],out=nota2);
+
+	And3Way(a=nota0,b=nota1,c=nota2,out=out[0]);	
+	And3Way(a=a[0],b=nota1,c=nota2,out=out[1]);	
+	And3Way(a=nota0,b=a[1],c=nota2,out=out[2]);	
+	And3Way(a=a[0],b=a[1],c=nota2,out=out[3]);
+	And3Way(a=nota0,b=nota1,c=a[2],out=out[4]);	
+	And3Way(a=a[0],b=nota1,c=a[2],out=out[5]);	
+	And3Way(a=nota0,b=a[1],c=a[2],out=out[6]);	
+	And3Way(a=a[0],b=a[1],c=a[2],out=out[7]);
+
+
+
+}
