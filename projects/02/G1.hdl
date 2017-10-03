@@ -4,7 +4,7 @@ CHIP G1{
 
 	PARTS:
 	And(a=p[3],b=p[2],out=O1);
-	And(a=p[1],b=g[1],out=O2);
+	And(a=p[1],b=g[0],out=O2);
 	And(a=O1,b=O2,out=and1);
 	
 	And(a=p[3],b=p[2],out=O3);

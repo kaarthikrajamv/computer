@@ -1,0 +1,13 @@
+CHIP Decoder2to4{
+	IN a[2];
+	OUT out[4];
+
+	PARTS:
+	Not(in =a[0],out=nota0);
+	Not(in =a[1],out=nota1);
+
+	And(a=nota0,b=nota1,out=out[0]);
+	And(a=a[0],b=nota1,out=out[1]);
+	And(a=nota0,b=a[1],out=out[2]);
+	And(a=a[0],b=a[1],out=out[3]);
+}
