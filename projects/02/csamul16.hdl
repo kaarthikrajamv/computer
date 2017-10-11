@@ -17,7 +17,9 @@ CHIP csamul16{
 	
 	HigherCLA(a=s41,b=c41,sum=prod1);
 	And16(a=prod1,b=prod1,out[0..7]=prods, out[8..15]=ps);
-	And16(a=prod1,b=prod1,out=z);
-	Or8Way(in=ps,out=overflow);
+	
+  And16(a=prod1,b=prod1,out=z);
+
+  Or8Way(in=ps,out=overflow);
 	
 }
