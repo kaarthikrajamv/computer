@@ -1,0 +1,15 @@
+CHIP calcJ{
+	IN in[16];
+	OUT J;
+
+
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+    And8Way(a[0]=in[2],a[1]=in[1],a[2]=in[0],out=o1);
+
+}
