@@ -3,6 +3,9 @@
 #define INFILE "Add.asm"
 #define OUTFILE "Add.hack"
 
+char* CinstructionParser();
+
+
 struct hash{
 	char *name;
 	int address;
