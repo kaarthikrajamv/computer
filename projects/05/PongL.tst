@@ -17,6 +17,6 @@ ROM32K load PongL.hack,
 set RAM16K[0] 4,
 output;
 
-repeat  16383{
+repeat  163830{
     tick, tock, output;
 }
