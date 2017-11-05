@@ -4,43 +4,40 @@
 #define OUTFILE "Add.hack"
 
 char* CinstructionParser();
+char* AinstructionParser();
+void RemoveSpacesandComments();
 
+int LineCounter = 0;
 
 struct hash{
 	char *name;
 	int address;
 	struct hash *next;
 };
-
 typedef struct hash hash;
 
-void func(char* p,int i)
-{
-	char *b;
-	if(i==1)
-		b="Hello Guys";
-	else
-		b="Hello";
-}
 void main()
 {
-	hash table[100];
 	FILE *rp = fopen(INFILE,"r");
 	FILE *wp = fopen(OUTFILE,"w");
-	char a[1000];
-	char *b;
-	printf("%p\n",b );
-	printf("%p\n",a );
-	func(b,0);
-	printf("%p\n",b );
-	func(b,1);
-	printf("%p\n",b );
+	char str[100];
+	char writestr[100];
 
-	while(fgets(a,1000,rp))
+	RemoveSpacesandComments();
+
+	while(fgets(str,100,rp))
 	{
-		printf("%s",a);
-					
-		break;
-	}
-		
+		if(str[0] == '@' || str[0] == '(')
+		{
+			writestr = AinstructionParser(str,LineCounter);
+			fprintf(wp,"%s\n",writestr);
+		}
+		else if(str[0] != '\n')
+		{
+			writestr = CinstructionParser(str);
+			fprintf(wp,"%s\n",writestr);				
+		}
+		else
+			continue;
+	}		
 }
