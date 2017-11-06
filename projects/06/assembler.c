@@ -44,19 +44,16 @@ void main()
 	fclose(rp);
 	FILE *rp1 = fopen(INFILE,"r");
 
-	printf("After RemoveSpacesandComments()\n");
 	SymbolTableFiller();
-	printf("After SymbolTableFiller()\n");
 	while(fgets(str,100,rp1))
 	{
 //		printf("%s\n",str );
 		if(str[0] == '@' )
 		{
 			writestr = AInstructionParser(str);
-			printf("%s\n",writestr);
 			fprintf(wp,"%s\n",writestr);
 		}
-		else if(str[0] != '\n' && str[0]!='\r')
+		else if(str[0] != '\n' && str[0]!='\r' && str[0] != '(')
 		{
 			// printf("Into C INs\n");
 			writestr = CInstructionParser(str);

@@ -11,7 +11,6 @@ void JPSetter(char,char,char);
 
 
 char* CInstructionParser(char* CString){
-	printf("%s",CString );
 	bit=equal=semicolon=a=d=m=am=0;
 	Ins[0]='1';
 	Ins[1]='1';
@@ -36,9 +35,10 @@ char* CInstructionParser(char* CString){
 	// else if(equal)printf("How Many Equals Are you Planning in Your Operation\n");
 	OperationParser(CString);
 	// printf("No of Semicolon%d\n",semicolon);
-	if(semicolon==1)JumpParser(CString);
+	if(semicolon==1){
+		JumpParser(CString);
+	}
 	// else if(semicolon)printf("Plz Provide semicolon Only Between Operation and Jump.(No semicolon @END)\n");
-	printf("%s\n", Ins);
 	return Ins;
 }
 
@@ -77,6 +77,7 @@ void MemoryParser(char* CString){
 	bit++;
 }
 void JumpParser(char* CString){
+	if(CString[bit]==';')bit++;
 	while(CString[bit] ==' ')bit++;
 	if(CString[bit]=='j' || CString[bit]=='J'){
 		bit++;
@@ -121,7 +122,9 @@ void JumpParser(char* CString){
 			case 'm':{
 					bit++;
 					if(CString[bit]=='P' || CString[bit]=='p')
-						JPSetter('1','1','1');
+						{
+							JPSetter('1','1','1');
+						}
 					else printf("Error Code JMP\n");
 					break;
 				}
