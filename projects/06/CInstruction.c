@@ -11,6 +11,7 @@ void JPSetter(char,char,char);
 
 
 char* CInstructionParser(char* CString){
+	printf("%s\n",CString );
 	bit=equal=semicolon=a=d=m=am=0;
 	Ins[0]='1';
 	Ins[1]='1';
@@ -21,19 +22,22 @@ char* CInstructionParser(char* CString){
 	{
 		Ins[i]='0';
 	}
-	for (int i = 0; CString[i] != '\0' && CString[i] != '\\'; ++i)
+	for (int i = 0;( CString[i] != '\0' || CString[i] != '\r') && CString[i] != '/'; ++i)
 	{
 		if(CString[i]=='@'){
-			printf("I'm a 'C' ; No 'A' plz\n");
+
+			printf("I'm a 'C' ; No 'A' plz %c\n",CString[i]);
 		}
 		if(CString[i]=='=')equal+=1;
 		if(CString[i]==';')semicolon+=1;
 	}
 	if(equal==1)MemoryParser(CString);
-	else if(equal)printf("How Many Equals Are you Planning in Your Operation\n");
+	printf("No of equal%d\n",semicolon );
+	// else if(equal)printf("How Many Equals Are you Planning in Your Operation\n");
 	OperationParser(CString);
+	printf("No of Semicolon%d\n",semicolon);
 	if(semicolon==1)JumpParser(CString);
-	else if(semicolon)printf("Plz Provide semicolon Only Between Operation and Jump.(No semicolon @END)\n");
+	// else if(semicolon)printf("Plz Provide semicolon Only Between Operation and Jump.(No semicolon @END)\n");
 	return Ins;
 }
 
@@ -127,7 +131,7 @@ void JumpParser(char* CString){
 		}
 	}
 	else{
-		if(CString[bit]=='\0')printf("semicolon at end not required\n");
+		if(CString[bit]=='\0' || CString[bit]=='\r')printf("semicolon at end not required\n");
 		else printf("Wrong Code\n");
 	}
 }
@@ -207,6 +211,7 @@ void OperationParser(char* CString){
 				switch(CString[bit]){
 					case '/':
 					case '\0':
+					case '\r':
 					case ';':{
 							OPSetter('0','0','1','1','0','0');
 							break;
@@ -319,6 +324,7 @@ void OperationParser(char* CString){
 				switch(CString[bit]){
 					case '/':
 					case '\0':
+					case '\r':
 					case ';':{
 							OPSetter('1','1','0','0','0','0');
 							break;
@@ -388,14 +394,14 @@ void JPSetter(char J1,char J2,char J3){
 	Ins[15]=J3;
 }
 
-int main(int argc, char const *argv[])
-{
-	char arr[100];
-	int c=1;
-	printf("Just to test\n");
-	while(c){
-		scanf("%s", arr);
-		printf("OUT%s\n", CInstructionParser(arr));
-	}
-	return 0;
-}
+// int main(int argc, char const *argv[])
+// {
+// 	char arr[100];
+// 	int c=1;
+// 	printf("Just to test\n");
+// 	while(c){
+// 		scanf("%s", arr);
+// 		printf("OUT%s\n", CInstructionParser(arr));
+// 	}
+// 	return 0;
+// }

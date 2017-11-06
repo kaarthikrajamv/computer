@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-int LineCounter = 0;
+#define INFILE "Add.asm"
 
 void RemoveSpacesfromLine(char* source)
 {
@@ -52,18 +51,18 @@ void RemoveSpacesandComments()
 	fclose(fptr2);
 }
 
-void fun()
-{
-	FILE *fptr;
-	fptr = fopen(SourceFile,"r");
-	char str[100];
-	while(fgets(str,100,fptr1)) 
-	{
-		if(str[0] != '(' && str[0] != '')
-			LineCounter++;
-		if(str[0] == '@' || str[0] == '(')
-			AInstructionParser(str,LineCounter);
-		else
-			CInstructionParser(str);
-	}
-}
+// void fun()
+// {
+// 	FILE *fptr;
+// 	fptr = fopen(SourceFile,"r");
+// 	char str[100];
+// 	while(fgets(str,100,fptr1)) 
+// 	{
+// 		if(str[0] != '(' && str[0] != '')
+// 			LineCounter++;
+// 		if(str[0] == '@' || str[0] == '(')
+// 			AInstructionParser(str,LineCounter);
+// 		else
+// 			CInstructionParser(str);
+// 	}
+// }

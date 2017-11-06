@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <ctype.h>
 
-char bitstring[16];
 
 struct symbol{
 	char symbol[30];
@@ -13,6 +12,7 @@ struct symbol{
 
 int current_address = 16;
 
+char bitstring[16];
 int hash(char ParsedString[])
 {
 	int address = 0;
@@ -69,8 +69,8 @@ int hash(char ParsedString[])
 }
 void SymbolTableFiller()
 {
-	char* str; 
-	for(int i=0;i<100000;i++)
+	char str[100]; 
+	for(int i=0;i<5000;i++)
 		strcpy(table[i].symbol,"1");
 	strcpy(table[16].symbol,"SP");
 	table[16].address = 0;
@@ -88,24 +88,31 @@ void SymbolTableFiller()
 	table[22].address = 	24576;
 
 	for(int i=0;i<=15;i++)
-	{	
-		sprintf(str, "%d", i);
-		strcpy(table[i].symbol,strcat("R",str));
-		table[i].address = i;
+	{	;
+		// sprintf(str, "%d", i);
+		// printf("Inside S\n");
+
+		// strcpy(table[i].symbol,strcat("R",str));
+		// printf("Inside S\n");
+
+		// table[i].address = i;
+
+		// printf("Inside S1\n");
+
 	}
 }
 char* inttobin(int address)
 {
-	char* bitstring = (char*)malloc(sizeof(char)*16);
+	
 	strcpy(bitstring,"0000000000000000");
-	int i=0;
+	int i=15;
 	while(address)
 	{
-		bitstring[i++] = (char)(address%2);
+		bitstring[i--] = (char)(address%2);
 		address /= 2;
 	}
 	return bitstring;
-}
+}	
 char* AInstructionParser(char *String,int line)
 {
 	char ParsedString[100];
@@ -113,11 +120,16 @@ char* AInstructionParser(char *String,int line)
 	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0';i++)
 		ParsedString[j++] = String[i];
 	ParsedString[j] = '\0';
-	for(i=hash(ParsedString),j=0;table[i].symbol[0] != '1' || j <= 99999 ;i=(i + j + j*j)%5000,j++)
+	if(toascii(ParsedString[0]) >=48 && toascii(ParsedString[0])<=57)
+		return inttobin(atoi(ParsedString));
+
+	
+	for(i=hash(ParsedString),j=0;table[i].symbol[0] != '1' || j <= 99999 ;i=(i + j/2 + j*j/2)%5000,j++)
 	{
 		if(strcmp(table[i].symbol,ParsedString) == 0)
 			return inttobin(table[i].address);
 	}
+
 	strcpy(table[i].symbol,ParsedString);
 	if(current_address == 16384 || current_address == 24576)
 		current_address++;
