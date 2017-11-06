@@ -10,7 +10,7 @@ struct symbol{
 	int address;
 }table[5000];
 
-int current_address = 16;
+int current_address = 16,n=23;
 
 char bitstring[16];
 int hash(char ParsedString[])
@@ -71,9 +71,7 @@ int hash(char ParsedString[])
 }
 void SymbolTableFiller()
 {
-	char str[100]; 
-	for(int i=0;i<5000;i++)
-		strcpy(table[i].symbol,"1");
+	char str[100];
 	strcpy(table[16].symbol,"SP");
 	table[16].address = 0;
 	strcpy(table[17].symbol,"LCL");
@@ -122,19 +120,20 @@ void SymbolTableFiller()
 	strcpy(table[15].symbol,"R15");
 	table[15].address =  15;
 
-	// for(int i=0;i<=15;i++)
-	// {	;
-	// 	// sprintf(str, "%d", i);
-	// 	// printf("Inside S\n");
-
-	// 	// strcpy(table[i].symbol,strcat("R",str));
-	// 	// printf("Inside S\n");
-
-	// 	// table[i].address = i;
-
-	// 	// printf("Inside S1\n");
-
-	// }
+}
+char* LabelParser(char *String,int line){
+	char ParsedString[100];
+	int j=0,i;
+	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/';i++)
+		ParsedString[j++] = String[i];
+	ParsedString[j] = '\0';
+	strcpy(table[n].symbol,ParsedString);
+	table[n++].address = line;
+}
+void printtable()
+{
+	for(int i=0;i<n;i++)
+			printf("%s\t%d\n",table[i].symbol,table[i].address);
 }
 char* inttobin(int address)
 {
@@ -148,38 +147,30 @@ char* inttobin(int address)
 	}
 	return bitstring;
 }	
-char* AInstructionParser(char *String,int line)
+char* AInstructionParser(char *String)
 {
 	char ParsedString[100];
 	int j=0,i;
-	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r';i++)
+	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/';i++)
 		ParsedString[j++] = String[i];
 	ParsedString[j] = '\0';
+	// if(String[0] == '(' && line == -1)
+		// return inttobin();
 	if(toascii(ParsedString[0]) >=48 && toascii(ParsedString[0])<=57)
 	{
 		printf("%d\n",atoi(ParsedString) );
 		return inttobin(atoi(ParsedString));
 	}
-	printf("%d\n",hash(ParsedString));
-	
-	for(i=hash(ParsedString),j=0;table[i].symbol[0] != '1' && j <= 4999 ;i=(i + j/2 + j*j/2)%5000,j++)
-	{
-		printf("%s\n%s",table[i].symbol,ParsedString);
+
+	for(int i=0;i<n;i++)
 		if(strcmp(table[i].symbol,ParsedString) == 0)
-		{
-			printf("Inside if in for\n");
 			return inttobin(table[i].address);
-		}
-	}
 
 	strcpy(table[i].symbol,ParsedString);
 	if(current_address == 16384 || current_address == 24576)
 		current_address++;
-	if(String[0] == '@')
-		table[i].address = current_address++;
-	else if(String[0] == '(')
-		table[i].address = line;
-	return inttobin(table[i].address);
+	table[n++].address = current_address++;
+	return inttobin(table[n-1].address);
 }
 
 
