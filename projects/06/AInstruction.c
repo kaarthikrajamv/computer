@@ -17,7 +17,6 @@ int hash(char ParsedString[])
 {
 	
 	printf("%s\n",ParsedString);
-	printf("%d\n",strcmp(ParsedString,"R0"));
 	int address = 0;
 	if(strcmp(ParsedString,"SP") == 0)
 		return 16;
@@ -163,10 +162,14 @@ char* AInstructionParser(char *String,int line)
 	}
 	printf("%d\n",hash(ParsedString));
 	
-	for(i=hash(ParsedString),j=0;table[i].symbol[0] != '1' || j <= 4999 ;i=(i + j/2 + j*j/2)%5000,j++)
+	for(i=hash(ParsedString),j=0;table[i].symbol[0] != '1' && j <= 4999 ;i=(i + j/2 + j*j/2)%5000,j++)
 	{
+		printf("%s\n%s",table[i].symbol,ParsedString);
 		if(strcmp(table[i].symbol,ParsedString) == 0)
+		{
+			printf("Inside if in for\n");
 			return inttobin(table[i].address);
+		}
 	}
 
 	strcpy(table[i].symbol,ParsedString);
