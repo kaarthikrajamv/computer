@@ -3,11 +3,10 @@
 #include "AInstruction.c"
 #include "CInstruction.c"
 #include "Parser.c"
-#define INFILE "Max.asm"
-#define OUTFILE "Add.hack"
+#define OUTFILE "Prog.hack"
 
 char* CInstructionParser(char*);
-char* LabelParser(char*,int);
+void LabelParser(char*,int);
 char* AInstructionParser(char*);
 void RemoveSpacesandComments();
 void printtable();
@@ -27,7 +26,10 @@ void main()
 	char *writestr;
 
 	RemoveSpacesandComments();
+	SymbolTableFiller();
 	FILE *rp = fopen(INFILE,"r");
+	if(rp == NULL)
+		exit(0);
 	FILE *wp = fopen(OUTFILE,"w");
 	while(fgets(str,100,rp))
 	{
@@ -43,8 +45,8 @@ void main()
 	}
 	fclose(rp);
 	FILE *rp1 = fopen(INFILE,"r");
+	printf("Hello\n");
 
-	SymbolTableFiller();
 	while(fgets(str,100,rp1))
 	{
 //		printf("%s\n",str );
@@ -66,5 +68,5 @@ void main()
 	}
 	fclose(rp1);		
 	fclose(wp);
-	printtable();		
+	// printtable();		
 }

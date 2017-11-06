@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define INFILE "Max.asm"
+#define INFILE "Prog.asm"
 
 void RemoveSpacesfromLine(char* source)
 {
