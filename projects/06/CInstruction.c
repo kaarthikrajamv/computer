@@ -11,7 +11,7 @@ void JPSetter(char,char,char);
 
 
 char* CInstructionParser(char* CString){
-	printf("%s\n",CString );
+	printf("%s",CString );
 	bit=equal=semicolon=a=d=m=am=0;
 	Ins[0]='1';
 	Ins[1]='1';
@@ -22,22 +22,23 @@ char* CInstructionParser(char* CString){
 	{
 		Ins[i]='0';
 	}
-	for (int i = 0;( CString[i] != '\0' || CString[i] != '\r') && CString[i] != '/'; ++i)
+	for (int i = 0;( CString[i] != '\0' && CString[i] != '\r' && CString[i]!='\n') && CString[i] != '/'; ++i)
 	{
 		if(CString[i]=='@'){
 
-			printf("I'm a 'C' ; No 'A' plz %c\n",CString[i]);
+			printf("I'm a 'C' ; No 'A' plz\n");
 		}
 		if(CString[i]=='=')equal+=1;
 		if(CString[i]==';')semicolon+=1;
 	}
 	if(equal==1)MemoryParser(CString);
-	printf("No of equal%d\n",semicolon );
+	// printf("No of equal%d\n",semicolon );
 	// else if(equal)printf("How Many Equals Are you Planning in Your Operation\n");
 	OperationParser(CString);
-	printf("No of Semicolon%d\n",semicolon);
+	// printf("No of Semicolon%d\n",semicolon);
 	if(semicolon==1)JumpParser(CString);
 	// else if(semicolon)printf("Plz Provide semicolon Only Between Operation and Jump.(No semicolon @END)\n");
+	printf("%s\n", Ins);
 	return Ins;
 }
 
@@ -125,14 +126,14 @@ void JumpParser(char* CString){
 					break;
 				}
 			default :{
-					printf("Wrong Jump Statement Probably\n");
+					// printf("Wrong Jump Statement Probably\n");
 					break;
 				}
 		}
 	}
 	else{
-		if(CString[bit]=='\0' || CString[bit]=='\r')printf("semicolon at end not required\n");
-		else printf("Wrong Code\n");
+		// if(CString[bit]=='\0' || CString[bit]=='\r' || CString[bit]==';')printf("semicolon at end not required\n");
+		// else printf("Wrong Code\n");
 	}
 }
 void OperationParser(char* CString){
@@ -373,7 +374,7 @@ void OperationParser(char* CString){
 			}
 
 			default: 
-				printf("Error in C ops\n");
+				// printf("Error in C ops\n");
 				break;
 	}
 	while(CString[bit] ==' ')bit++;

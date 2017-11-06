@@ -3,7 +3,7 @@
 #include "AInstruction.c"
 #include "CInstruction.c"
 #include "Parser.c"
-#define INFILE "Add.asm"
+#define INFILE "Max.asm"
 #define OUTFILE "Add.hack"
 
 char* CInstructionParser(char*);
@@ -22,12 +22,13 @@ int LineCounter = 0;
 
 void main()
 {
-	FILE *rp = fopen(INFILE,"r");
-	FILE *wp = fopen(OUTFILE,"w");
 	char str[100];
 	char *writestr;
 
 	RemoveSpacesandComments();
+	FILE *rp = fopen(INFILE,"r");
+	FILE *wp = fopen(OUTFILE,"w");
+	
 	printf("After RemoveSpacesandComments()\n");
 	SymbolTableFiller();
 	printf("After SymbolTableFiller()\n");
@@ -39,11 +40,12 @@ void main()
 			printf("Hello\n");
 
 			writestr = AInstructionParser(str,LineCounter);
+			printf("%s\n",writestr);
 			fprintf(wp,"%s\n",writestr);
 			if(str[0] == '@')
 				LineCounter++;
 		}
-		else if(str[0] != '\n' || str[0]!='\r')
+		else if(str[0] != '\n' && str[0]!='\r')
 		{
 			printf("Into C INs\n");
 			writestr = CInstructionParser(str);

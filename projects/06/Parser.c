@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define INFILE "Add.asm"
+#define INFILE "Max.asm"
 
 void RemoveSpacesfromLine(char* source)
 {
@@ -28,7 +28,7 @@ void RemoveSpacesandComments()
 	{
 		int flag = 0;		
 		int temp = strlen(str);
-		if(str[0] == ' ')
+		if(str[0] == '\r')
 			flag = 1;
 		if((str[0] == '/' && (str[1] == '*' || str[1] == '/')) || str[0] == '*' && str[1] == '/')
 			flag = 1;
