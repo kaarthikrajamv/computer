@@ -13,65 +13,67 @@ struct symbol{
 int current_address = 16,n=23;
 
 char bitstring[16];
-// int hash(char ParsedString[])
-// {
+int hash(char ParsedString[])
+{
 	
-// 	printf("%s\n",ParsedString);
-// 	int address = 0;
-// 	if(strcmp(ParsedString,"SP") == 0)
-// 		return 16;
-// 	if(strcmp(ParsedString,"LCL") == 0)
-// 		return 17;
-// 	if(strcmp(ParsedString,"ARG") == 0)
-// 		return 18;
-// 	if(strcmp(ParsedString,"THIS") == 0)
-// 		return 19;
-// 	if(strcmp(ParsedString,"THAT") == 0)
-// 		return 20;
-// 	if(strcmp(ParsedString,"SCREEN") == 0)
-// 		return 21;
-// 	if(strcmp(ParsedString,"KBD") == 0)
-// 		return 22;
-// 	if(strcmp(ParsedString,"R0") == 0)
-// 		return 0;
-// 	if(strcmp(ParsedString,"R1") == 0)
-// 		return 1;
-// 	if(strcmp(ParsedString,"R2") == 0)
-// 		return 2;
-// 	if(strcmp(ParsedString,"R3") == 0)
-// 		return 3;
-// 	if(strcmp(ParsedString,"R4") == 0)
-// 		return 4;
-// 	if(strcmp(ParsedString,"R5") == 0)
-// 		return 5;
-// 	if(strcmp(ParsedString,"R6") == 0)
-// 		return 6;
-// 	if(strcmp(ParsedString,"R7") == 0)
-// 		return 7;
-// 	if(strcmp(ParsedString,"R8") == 0)
-// 		return 8;
-// 	if(strcmp(ParsedString,"R9") == 0)
-// 		return 9;
-// 	if(strcmp(ParsedString,"R10") == 0)
-// 		return 10;
-// 	if(strcmp(ParsedString,"R11") == 0)
-// 		return 11;
-// 	if(strcmp(ParsedString,"R12") == 0)
-// 		return 12;
-// 	if(strcmp(ParsedString,"R13") == 0)
-// 		return 13;
-// 	if(strcmp(ParsedString,"R14") == 0)
-// 		return 14;
-// 	if(strcmp(ParsedString,"R15") == 0)
-// 		return 15;
+	printf("%s\n",ParsedString);
+	int address = 0;
+	if(strcmp(ParsedString,"SP") == 0)
+		return 16;
+	if(strcmp(ParsedString,"LCL") == 0)
+		return 17;
+	if(strcmp(ParsedString,"ARG") == 0)
+		return 18;
+	if(strcmp(ParsedString,"THIS") == 0)
+		return 19;
+	if(strcmp(ParsedString,"THAT") == 0)
+		return 20;
+	if(strcmp(ParsedString,"SCREEN") == 0)
+		return 21;
+	if(strcmp(ParsedString,"KBD") == 0)
+		return 22;
+	if(strcmp(ParsedString,"R0") == 0)
+		return 0;
+	if(strcmp(ParsedString,"R1") == 0)
+		return 1;
+	if(strcmp(ParsedString,"R2") == 0)
+		return 2;
+	if(strcmp(ParsedString,"R3") == 0)
+		return 3;
+	if(strcmp(ParsedString,"R4") == 0)
+		return 4;
+	if(strcmp(ParsedString,"R5") == 0)
+		return 5;
+	if(strcmp(ParsedString,"R6") == 0)
+		return 6;
+	if(strcmp(ParsedString,"R7") == 0)
+		return 7;
+	if(strcmp(ParsedString,"R8") == 0)
+		return 8;
+	if(strcmp(ParsedString,"R9") == 0)
+		return 9;
+	if(strcmp(ParsedString,"R10") == 0)
+		return 10;
+	if(strcmp(ParsedString,"R11") == 0)
+		return 11;
+	if(strcmp(ParsedString,"R12") == 0)
+		return 12;
+	if(strcmp(ParsedString,"R13") == 0)
+		return 13;
+	if(strcmp(ParsedString,"R14") == 0)
+		return 14;
+	if(strcmp(ParsedString,"R15") == 0)
+		return 15;
 
-// 	for(int i=0;ParsedString[i]!='\0';i++)
-// 		address += toascii(ParsedString[i]);
-// 	return address;
-// }
+	for(int i=0;ParsedString[i]!='\0';i++)
+		address += toascii(ParsedString[i]);
+	return address;
+}
 void SymbolTableFiller()
 {
-	char str[100];
+	for(int i=0;i<50000;i++)
+		table[i].symbol[0] = '1';
+	
 	strcpy(table[16].symbol,"SP");
 	table[16].address = 0;
 	strcpy(table[17].symbol,"LCL");
@@ -121,15 +123,22 @@ void SymbolTableFiller()
 	table[15].address =  15;
 
 }
-char* LabelParser(char *String,int line){
+void LabelParser(char *String,int line)
+{
 	char ParsedString[100];
-	int j=0,i;
+	int j=0,i,a;
 	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/' && String[i]!= '';i++)
 		ParsedString[j++] = String[i];
 	ParsedString[j] = '\0';
-	strcpy(table[n].symbol,ParsedString);
-	table[n++].address = line;
-
+	printf("Hello %s\t%d\n",ParsedString,hash(ParsedString));
+	for(i=hash(ParsedString),j=0;j<50000 && table[i].symbol[0] != '1' ;j++,i= (i+j*(j+1)/2)%50000);
+	if(j == 50000){
+		printf("Buffer Overflow\n");
+		scanf("%d",&a);
+	}
+	printf("Hello1\n");
+	strcpy(table[i].symbol,ParsedString);
+	table[i].address = line;
 }
 void printtable()
 {
@@ -150,8 +159,8 @@ char* inttobin(int address)
 char* AInstructionParser(char *String)
 {
 	char ParsedString[100];
-	int j=0;
-	for(int i=1;String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/' ;i++)
+	int j=0,i,a;
+	for(i=1;String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/' ;i++)
 		ParsedString[j++] = String[i];
 	ParsedString[j] = '\0';
 	// printf("%s\n",ParsedString);
@@ -162,15 +171,20 @@ char* AInstructionParser(char *String)
 		// printf("%d\n",atoi(ParsedString) );
 		return inttobin(atoi(ParsedString));
 	}
-	for(int i=0;i<n;i++)
+	printf("%d\n",hash("SP"));
+	for(i=hash(ParsedString),j=0;j<50000 && table[i].symbol[0] != '1';j++,i=(i + j*(j+1)/2)%50000)
 		if(strcmp(table[i].symbol,ParsedString) == 0)
 			return inttobin(table[i].address);
-
-	strcpy(table[n].symbol,ParsedString);
+		
+	if(j == 50000){
+		printf("Buffer Overflow\n");
+		scanf("%d",&a);
+	}
+	strcpy(table[i].symbol,ParsedString);
 	if(current_address == 16384 || current_address == 24576)
 		current_address++;
-	table[n++].address = current_address++;
-	return inttobin(table[n-1].address);
+	table[i].address = current_address++;
+	return inttobin(table[i].address);
 }
 
 
