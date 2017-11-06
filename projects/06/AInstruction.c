@@ -6,69 +6,69 @@
 
 
 struct symbol{
-	char symbol[30];
+	char symbol[40];
 	int address;
-}table[5000];
+}table[50000];
 
 int current_address = 16,n=23;
 
 char bitstring[16];
-int hash(char ParsedString[])
-{
+// int hash(char ParsedString[])
+// {
 	
-	printf("%s\n",ParsedString);
-	int address = 0;
-	if(strcmp(ParsedString,"SP") == 0)
-		return 16;
-	if(strcmp(ParsedString,"LCL") == 0)
-		return 17;
-	if(strcmp(ParsedString,"ARG") == 0)
-		return 18;
-	if(strcmp(ParsedString,"THIS") == 0)
-		return 19;
-	if(strcmp(ParsedString,"THAT") == 0)
-		return 20;
-	if(strcmp(ParsedString,"SCREEN") == 0)
-		return 21;
-	if(strcmp(ParsedString,"KBD") == 0)
-		return 22;
-	if(strcmp(ParsedString,"R0") == 0)
-		return 0;
-	if(strcmp(ParsedString,"R1") == 0)
-		return 1;
-	if(strcmp(ParsedString,"R2") == 0)
-		return 2;
-	if(strcmp(ParsedString,"R3") == 0)
-		return 3;
-	if(strcmp(ParsedString,"R4") == 0)
-		return 4;
-	if(strcmp(ParsedString,"R5") == 0)
-		return 5;
-	if(strcmp(ParsedString,"R6") == 0)
-		return 6;
-	if(strcmp(ParsedString,"R7") == 0)
-		return 7;
-	if(strcmp(ParsedString,"R8") == 0)
-		return 8;
-	if(strcmp(ParsedString,"R9") == 0)
-		return 9;
-	if(strcmp(ParsedString,"R10") == 0)
-		return 10;
-	if(strcmp(ParsedString,"R11") == 0)
-		return 11;
-	if(strcmp(ParsedString,"R12") == 0)
-		return 12;
-	if(strcmp(ParsedString,"R13") == 0)
-		return 13;
-	if(strcmp(ParsedString,"R14") == 0)
-		return 14;
-	if(strcmp(ParsedString,"R15") == 0)
-		return 15;
+// 	printf("%s\n",ParsedString);
+// 	int address = 0;
+// 	if(strcmp(ParsedString,"SP") == 0)
+// 		return 16;
+// 	if(strcmp(ParsedString,"LCL") == 0)
+// 		return 17;
+// 	if(strcmp(ParsedString,"ARG") == 0)
+// 		return 18;
+// 	if(strcmp(ParsedString,"THIS") == 0)
+// 		return 19;
+// 	if(strcmp(ParsedString,"THAT") == 0)
+// 		return 20;
+// 	if(strcmp(ParsedString,"SCREEN") == 0)
+// 		return 21;
+// 	if(strcmp(ParsedString,"KBD") == 0)
+// 		return 22;
+// 	if(strcmp(ParsedString,"R0") == 0)
+// 		return 0;
+// 	if(strcmp(ParsedString,"R1") == 0)
+// 		return 1;
+// 	if(strcmp(ParsedString,"R2") == 0)
+// 		return 2;
+// 	if(strcmp(ParsedString,"R3") == 0)
+// 		return 3;
+// 	if(strcmp(ParsedString,"R4") == 0)
+// 		return 4;
+// 	if(strcmp(ParsedString,"R5") == 0)
+// 		return 5;
+// 	if(strcmp(ParsedString,"R6") == 0)
+// 		return 6;
+// 	if(strcmp(ParsedString,"R7") == 0)
+// 		return 7;
+// 	if(strcmp(ParsedString,"R8") == 0)
+// 		return 8;
+// 	if(strcmp(ParsedString,"R9") == 0)
+// 		return 9;
+// 	if(strcmp(ParsedString,"R10") == 0)
+// 		return 10;
+// 	if(strcmp(ParsedString,"R11") == 0)
+// 		return 11;
+// 	if(strcmp(ParsedString,"R12") == 0)
+// 		return 12;
+// 	if(strcmp(ParsedString,"R13") == 0)
+// 		return 13;
+// 	if(strcmp(ParsedString,"R14") == 0)
+// 		return 14;
+// 	if(strcmp(ParsedString,"R15") == 0)
+// 		return 15;
 
-	for(int i=0;ParsedString[i]!='\0';i++)
-		address += toascii(ParsedString[i]);
-	return address;
-}
+// 	for(int i=0;ParsedString[i]!='\0';i++)
+// 		address += toascii(ParsedString[i]);
+// 	return address;
+// }
 void SymbolTableFiller()
 {
 	char str[100];
@@ -124,11 +124,12 @@ void SymbolTableFiller()
 char* LabelParser(char *String,int line){
 	char ParsedString[100];
 	int j=0,i;
-	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/';i++)
+	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/' && String[i]!= '';i++)
 		ParsedString[j++] = String[i];
 	ParsedString[j] = '\0';
 	strcpy(table[n].symbol,ParsedString);
 	table[n++].address = line;
+
 }
 void printtable()
 {
@@ -137,7 +138,6 @@ void printtable()
 }
 char* inttobin(int address)
 {
-	printf("Address %d\n",address);
 	strcpy(bitstring,"0000000000000000");
 	int i=15;
 	while(address)
@@ -150,23 +150,23 @@ char* inttobin(int address)
 char* AInstructionParser(char *String)
 {
 	char ParsedString[100];
-	int j=0,i;
-	for(i=1;String[i]!=')' && String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/';i++)
+	int j=0;
+	for(int i=1;String[i]!=' ' && String[i]!='\0' && String[i]!='\n' && String[i]!='\r' && String[i]!='/' ;i++)
 		ParsedString[j++] = String[i];
 	ParsedString[j] = '\0';
-	// if(String[0] == '(' && line == -1)
-		// return inttobin();
+	// printf("%s\n",ParsedString);
+	// printf("%s\n",String);
+
 	if(toascii(ParsedString[0]) >=48 && toascii(ParsedString[0])<=57)
 	{
-		printf("%d\n",atoi(ParsedString) );
+		// printf("%d\n",atoi(ParsedString) );
 		return inttobin(atoi(ParsedString));
 	}
-
 	for(int i=0;i<n;i++)
 		if(strcmp(table[i].symbol,ParsedString) == 0)
 			return inttobin(table[i].address);
 
-	strcpy(table[i].symbol,ParsedString);
+	strcpy(table[n].symbol,ParsedString);
 	if(current_address == 16384 || current_address == 24576)
 		current_address++;
 	table[n++].address = current_address++;
